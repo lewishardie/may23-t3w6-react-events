@@ -7,6 +7,7 @@
 //  - Button to decrease Pokemon count
 
 import React from "react";
+import Pokemon from "./Pokemon";
 
 
 class App extends React.Component {
@@ -15,14 +16,35 @@ class App extends React.Component {
   
     // srart with at least one pokemon on screen
     this.state = {
-      pokemonCount: 1
+      pokemonCount: 3
     }
+  }
+
+  exampleFunction(){
+    console.log("hello world, from button click")
+  }
+
+  decreasePokemonCount(currentCount){
+    if (currentCount > 0 ){
+      this.setState({pokemonCount: currentCount - 1 });
+    }
+  }
+
+  increasePokemonCount(currentCount){
+    this.setState({pokemonCount: currentCount + 1 });
   }
 
   render(){
     return (
       <div>
         <h1>Pokemon Page</h1>
+        <button onClick={() => {this.decreasePokemonCount(this.state.pokemonCount)}}>Decrease Pokemon count</button>
+        <button onClick={() => {this.increasePokemonCount(this.state.pokemonCount)}}>Increase Pokemon count</button>
+        {/* <Pokemon /> */}
+        {
+          // Array(arraySize).fill(defaultValue).map(() => {return JSW})
+          Array(this.state.pokemonCount).fill(null).map((element, index) => <Pokemon key={index}/>)
+        }
       </div>
     )
   }
